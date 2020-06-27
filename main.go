@@ -17,20 +17,24 @@ func main() {
 	}
 	min := 0
 	max := 101
-	guessedNumber := min + (max-min)/2
-	fmt.Println("Is number", guessedNumber, "<,>,= number you guessed?")
-	comparisonAnswer, err := bufio.NewReader(os.Stdin).ReadString('\n')
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-	if strings.TrimSpace(comparisonAnswer) == ">" {
-		min = guessedNumber
-	}
-	if strings.TrimSpace(comparisonAnswer) == "<" {
-		max = guessedNumber
-	}
-	if strings.TrimSpace(comparisonAnswer) == "=" {
-		fmt.Println("Well done")
+	for {
+		guessedNumber := min + (max-min)/2
+		fmt.Println("Is number", guessedNumber, "<,>,= number you guessed?")
+		comparisonAnswer, err := bufio.NewReader(os.Stdin).ReadString('\n')
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
+		if strings.TrimSpace(comparisonAnswer) == ">" {
+			min = guessedNumber
+		}
+		if strings.TrimSpace(comparisonAnswer) == "<" {
+			max = guessedNumber
+		}
+		if strings.TrimSpace(comparisonAnswer) == "=" {
+			fmt.Println("Well done")
+			break
+		}
 	}
 }
